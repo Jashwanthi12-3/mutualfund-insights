@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "General Sans";
+    --font-mono: monospace;
+    --radius: 0.5rem;
+
+    --background: 0.98 0.008 230;
+    --foreground: 0.18 0.015 230;
+    --card: 1.0 0.004 230;
+    --card-foreground: 0.18 0.015 230;
+    --popover: 1.0 0.004 230;
+    --popover-foreground: 0.18 0.015 230;
+
+    --primary: 0.42 0.14 240;
+    --primary-foreground: 0.98 0.005 240;
+
+    --secondary: 0.95 0.01 230;
+    --secondary-foreground: 0.28 0.015 230;
+    --muted: 0.94 0.01 230;
+    --muted-foreground: 0.5 0.012 230;
+
+    --accent: 0.6 0.15 170;
+    --accent-foreground: 0.98 0.005 170;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.005 25;
+
+    --success: 0.55 0.16 150;
+    --success-foreground: 0.98 0.005 150;
+
+    --warning: 0.7 0.15 85;
+    --warning-foreground: 0.12 0.01 85;
+
+    --border: 0.9 0.008 230;
+    --input: 0.9 0.008 230;
+    --ring: 0.42 0.14 240;
+
+    --chart-1: 0.42 0.14 240;
+    --chart-2: 0.6 0.15 170;
+    --chart-3: 0.55 0.16 150;
+    --chart-4: 0.7 0.15 85;
+    --chart-5: 0.55 0.22 25;
+
+    --sidebar: 0.96 0.01 230;
+    --sidebar-foreground: 0.2 0.015 230;
+    --sidebar-primary: 0.42 0.14 240;
+    --sidebar-primary-foreground: 0.98 0.005 240;
+    --sidebar-accent: 0.92 0.01 230;
+    --sidebar-accent-foreground: 0.28 0.015 230;
+    --sidebar-border: 0.88 0.01 230;
+    --sidebar-ring: 0.42 0.14 240;
+  }
+
+  .dark {
+    --background: 0.13 0.01 235;
+    --foreground: 0.92 0.01 235;
+    --card: 0.17 0.01 235;
+    --card-foreground: 0.92 0.01 235;
+    --popover: 0.2 0.012 235;
+    --popover-foreground: 0.92 0.01 235;
+
+    --primary: 0.72 0.16 240;
+    --primary-foreground: 0.13 0.01 240;
+
+    --secondary: 0.21 0.015 235;
+    --secondary-foreground: 0.82 0.01 235;
+    --muted: 0.21 0.015 235;
+    --muted-foreground: 0.52 0.01 235;
+
+    --accent: 0.68 0.14 170;
+    --accent-foreground: 0.13 0.01 170;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.92 0.01 25;
+
+    --success: 0.6 0.16 150;
+    --success-foreground: 0.92 0.01 150;
+
+    --warning: 0.72 0.15 85;
+    --warning-foreground: 0.13 0.01 85;
+
+    --border: 0.26 0.01 235;
+    --input: 0.26 0.01 235;
+    --ring: 0.72 0.16 240;
+
+    --chart-1: 0.72 0.16 240;
+    --chart-2: 0.68 0.14 170;
+    --chart-3: 0.6 0.16 150;
+    --chart-4: 0.72 0.15 85;
+    --chart-5: 0.65 0.18 25;
+
+    --sidebar: 0.16 0.012 235;
+    --sidebar-foreground: 0.92 0.01 235;
+    --sidebar-primary: 0.72 0.16 240;
+    --sidebar-primary-foreground: 0.13 0.01 240;
+    --sidebar-accent: 0.2 0.012 235;
+    --sidebar-accent-foreground: 0.82 0.01 235;
+    --sidebar-border: 0.24 0.01 235;
+    --sidebar-ring: 0.72 0.16 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .data-card {
+    @apply bg-card border border-border rounded-lg p-4 shadow-xs;
+  }
+
+  .data-table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-muted/30 text-muted-foreground font-semibold uppercase tracking-widest;
+  }
+
+  .data-table tbody tr {
+    @apply border-b border-border hover:bg-muted/10 transition-smooth;
+  }
+
+  .badge-success {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-success/20 text-success-foreground;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-warning/20 text-warning-foreground;
+  }
+
+  .badge-destructive {
+    @apply inline-flex items-center px-2 py-1 rounded-md text-xs font-semibold bg-destructive/20 text-destructive-foreground;
+  }
+}

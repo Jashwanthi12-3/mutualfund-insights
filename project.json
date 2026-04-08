@@ -1,0 +1,24 @@
+{
+  "overview": "A full-stack mutual fund investment platform with four user roles — Admin, Investor, Financial Advisor, and Data Analyst. Features a fund browser with 20+ seeded funds, side-by-side comparison charts, SIP and lump sum investment calculators, fund detail views with performance charts, and an admin dashboard for managing users, approvals, and fund data.",
+  "features": [
+    "Role-based dashboards for all 4 user roles",
+    "Fund browser with 20+ seeded mutual funds, category/risk filters, and sorting",
+    "Fund detail view with historical performance charts and manager info",
+    "Side-by-side fund comparison for up to 4 funds with overlapping chart lines",
+    "SIP and lump sum investment calculators with 12% default return projections",
+    "Admin dashboard: user management, advisor approvals, inline fund editing",
+    "Financial Advisor and Data Analyst dashboards",
+    "Responsive design for mobile, tablet, and desktop"
+  ],
+  "category": "finance",
+  "tags": [
+    "mutual-funds",
+    "investment",
+    "finance",
+    "dashboard",
+    "calculators",
+    "charts",
+    "role-based-access"
+  ],
+  "last_updated": "2026-04-08T15:52:19.919Z"
+}

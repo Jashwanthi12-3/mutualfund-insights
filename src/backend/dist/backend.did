@@ -1,0 +1,135 @@
+type UserRole__1 = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserRole = 
+ variant {
+   Admin;
+   DataAnalyst;
+   FinancialAdvisor;
+   Investor;
+ };
+type User = 
+ record {
+   advisorStatus: opt AdvisorStatus;
+   email: text;
+   isActive: bool;
+   name: text;
+   "principal": principal;
+   registrationDate: Timestamp;
+   role: UserRole;
+ };
+type UpdateFundRequest = 
+ record {
+   expenseRatio: float64;
+   nav: float64;
+   return1Y: float64;
+   return3Y: float64;
+   return5Y: float64;
+   riskLevel: RiskLevel;
+ };
+type Timestamp = int;
+type RiskLevel = 
+ variant {
+   High;
+   Low;
+   Medium;
+ };
+type RegisterUserRequest = 
+ record {
+   email: text;
+   name: text;
+   role: UserRole;
+ };
+type PostArticleRequest = 
+ record {
+   category: text;
+   content: text;
+   title: text;
+ };
+type PlatformStats = 
+ record {
+   activeInvestors: nat;
+   pendingAdvisors: nat;
+   totalFunds: nat;
+   totalUsers: nat;
+ };
+type HistoricalPoint = 
+ record {
+   date: text;
+   nav: float64;
+ };
+type FundId = nat;
+type FundFilter = 
+ record {
+   category: opt FundCategory;
+   riskLevel: opt RiskLevel;
+   searchText: opt text;
+ };
+type FundCategory = 
+ variant {
+   Balanced;
+   Debt;
+   Equity;
+   MoneyMarket;
+ };
+type Fund = 
+ record {
+   category: FundCategory;
+   description: text;
+   expenseRatio: float64;
+   historicalData: vec HistoricalPoint;
+   id: FundId;
+   inceptionDate: text;
+   isActive: bool;
+   managerBio: text;
+   managerName: text;
+   minInvestment: float64;
+   name: text;
+   nav: float64;
+   return1Y: float64;
+   return3Y: float64;
+   return5Y: float64;
+   riskLevel: RiskLevel;
+ };
+type ArticleId = nat;
+type Article = 
+ record {
+   authorName: text;
+   authorPrincipal: principal;
+   category: text;
+   content: text;
+   id: ArticleId;
+   publishedAt: Timestamp;
+   title: text;
+ };
+type AdvisorStatus = 
+ variant {
+   Approved;
+   Pending;
+   Rejected;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  approveAdvisor: ("principal": principal) -> (bool);
+  assignCallerUserRole: (user: principal, role: UserRole__1) -> ();
+  getArticles: () -> (vec Article) query;
+  getCallerUser: () -> (opt User) query;
+  getCallerUserRole: () -> (UserRole__1) query;
+  getFavorites: () -> (vec FundId) query;
+  getFund: (id: FundId) -> (opt Fund) query;
+  getFunds: (filter: FundFilter) -> (vec Fund) query;
+  getPlatformStats: () -> (PlatformStats) query;
+  getTopPerformingFunds: (limit: nat) -> (vec Fund) query;
+  getUsers: () -> (vec User) query;
+  isCallerAdmin: () -> (bool) query;
+  postArticle: (req: PostArticleRequest) -> (Article);
+  registerUser: (req: RegisterUserRequest) -> (User);
+  rejectAdvisor: ("principal": principal) -> (bool);
+  removeFavorite: (fundId: FundId) -> ();
+  saveFavorite: (fundId: FundId) -> ();
+  toggleUserStatus: ("principal": principal) -> (bool);
+  updateFund: (id: FundId, req: UpdateFundRequest) -> (bool);
+}

@@ -1,0 +1,107 @@
+// Version: 1.0.0
+type AdvisorStatus__338815683 = {#Approved; #Pending; #Rejected};
+type ArticleId__678690314 = Nat;
+type ArticleId__866653977 = ArticleId__678690314;
+type Article__484002815 =
+  {
+    authorName : Text;
+    authorPrincipal : Principal;
+    category : Text;
+    content : Text;
+    id : ArticleId__866653977;
+    publishedAt : Timestamp__79406888;
+    title : Text
+  };
+type Data__159895909<T> = {var count : Nat__490723111; elements : [var ?T]};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type FundCategory__272180957 = {#Balanced; #Debt; #Equity; #MoneyMarket};
+type FundId__666063090 = FundId__874520536;
+type FundId__874520536 = Nat;
+type Fund__198161239 =
+  {
+    category : FundCategory__272180957;
+    description : Text;
+    expenseRatio : Float;
+    historicalData : [HistoricalPoint__159959717];
+    id : FundId__666063090;
+    inceptionDate : Text;
+    isActive : Bool;
+    managerBio : Text;
+    managerName : Text;
+    minInvestment : Float;
+    name : Text;
+    nav : Float;
+    return1Y : Float;
+    return3Y : Float;
+    return5Y : Float;
+    riskLevel : RiskLevel__857174151
+  };
+type HistoricalPoint__159959717 = {date : Text; nav : Float};
+type Internal__667636161<T> =
+  {children : [var ?Node__92254746<T>]; data : Data__159895909<T>};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__520550824<T> = {data : Data__159895909<T>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type Node__92254746<T> =
+  {#internal : Internal__667636161<T>; #leaf : Leaf__520550824<T>};
+type RiskLevel__857174151 = {#High; #Low; #Medium};
+type Set__532252804<T> = Set__710576254<T>;
+type Set__710576254<T> =
+  {var root : Node__92254746<T>; var size : Nat__490723111};
+type Timestamp__301639476 = Int;
+type Timestamp__778030842 = Timestamp__301639476;
+type Timestamp__79406888 = Timestamp__301639476;
+type UserRole__1054455867 = {#admin; #guest; #user};
+type UserRole__41952412 =
+  {#Admin; #DataAnalyst; #FinancialAdvisor; #Investor};
+type User__98118558 =
+  {
+    advisorStatus : ?AdvisorStatus__338815683;
+    email : Text;
+    isActive : Bool;
+    name : Text;
+    principal : Principal;
+    registrationDate : Timestamp__778030842;
+    role : UserRole__41952412
+  };
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1054455867>
+    };
+  stable articles :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Article__484002815]];
+      var elementIndex : Nat__490723111
+    };
+  stable favorites :
+    {
+      var root : Node__46230540<Principal, Set__532252804<FundId__666063090>>;
+      var size : Nat__490723111
+    };
+  stable funds :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Fund__198161239]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextArticleId : {var value : Nat};
+  stable nextUserId : {var value : Nat};
+  stable users :
+    {
+      var root : Node__46230540<Principal, User__98118558>;
+      var size : Nat__490723111
+    }
+};
